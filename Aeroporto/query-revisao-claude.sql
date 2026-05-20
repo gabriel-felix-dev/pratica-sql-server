@@ -85,7 +85,8 @@ SELECT	en.Cidade as Cidade,
 --             "Concluido" é maior que a quantidade em qualquer outro status individualmente.
 
 SELECT	*
-	FROM Passageiro AS pa;
+	FROM Passageiro AS pa
+	WHERE pa.NomeCompleto LIKE 'Thia%';
 
 SELECT	*
 	FROM Embarque AS em;
@@ -96,14 +97,21 @@ SELECT	*
 SELECT	*
 	FROM StatusOperacional AS so;
 
-SELECT	*
+SELECT	pa.Id as Identificador,
+		pa.NomeCompleto as Passageiro,
+		vo.CodigoUnico as CodigoVoo,
+		so.Nome as Status
 	FROM Passageiro AS pa
 		INNER JOIN Embarque AS em
 			ON em.IdPassageiro = pa.Id
 		INNER JOIN Voo AS vo
 			ON vo.Id = em.IdVoo
 		INNER JOIN StatusOperacional AS so
-			ON so.Id = vo.IdStatusOperacional	;
+			ON so.Id = vo.IdStatusOperacional
+	WHERE so.Nome = 'Concluido'
+	GROUP BY pa.Id, pa.NomeCompleto, vo.CodigoUnico, so.Nome
+	ORDER BY 1, 2, 3;
+	GO
 
 SELECT	pa.NomeCompleto as Passageiro, 
 		COUNT(vo.Id) as QuantidadeVoosConcluidos
@@ -114,6 +122,116 @@ SELECT	pa.NomeCompleto as Passageiro,
 			ON vo.Id = em.IdVoo
 		INNER JOIN StatusOperacional AS so
 			ON so.Id = vo.IdStatusOperacional
-	GROUP BY pa.NomeCompleto;
+	WHERE so.Nome = 'Concluido'
+	GROUP BY pa.NomeCompleto
+	HAVING COUNT(vo.Id) > (SELECT	TOP 1 em.IdPassageiro as IdentificadorPassageiro,
+									COUNT(em.Id) as TotalEmbarques
+								FROM Embarque AS em
+									INNER JOIN Voo AS vo
+										ON vo.Id = em.IdVoo
+									INNER JOIN StatusOperacional AS so
+										ON so.Id = vo.IdStatusOperacional
+								WHERE so.Nome = 'Concluido'
+								GROUP BY em.IdPassageiro, so.Nome
+								ORDER BY 2 DESC
+							);
 
-	-- Colocar o Having e fazer a subquery
+-- 1. Contagem dos embarques concluidos por passageiro:
+
+SELECT	em.IdPassageiro as IdentificadorPassageiro,
+		COUNT(em.Id) as TotalEmbarques
+	FROM Embarque AS em
+		INNER JOIN Voo AS vo
+			ON vo.Id = em.IdVoo
+		INNER JOIN StatusOperacional AS so
+			ON so.Id = vo.IdStatusOperacional
+	WHERE so.Nome = 'Concluido'
+	GROUP BY em.IdPassageiro;
+
+-- 2. Para cada passageiro, conte os embarques em cada outro status:
+
+SELECT	em.IdPassageiro as IdentificadorPassageiro,
+		COUNT(em.Id) as TotalEmbarques
+	FROM Embarque AS em
+		INNER JOIN Voo AS vo
+			ON vo.Id = em.IdVoo
+		INNER JOIN StatusOperacional AS so
+			ON so.Id = vo.IdStatusOperacional
+	WHERE so.Nome != 'Concluido'
+	GROUP BY em.IdPassageiro, so.Nome -- Separa por Id de passageiro e nome de Status Operacional. Ficará:
+									  --  IdPassageiro 1 - Cancelado 1
+									  --  IdPassageiro 1 - Atrasado 2 
+
+-- 3. Juntar as duas consultas como escalares no Having da busca por nome de passageiro
+
+SELECT	pa.NomeCompleto as Passageiro
+	FROM Passageiro AS pa
+	WHERE EXISTS (SELECT  1
+					  FROM Embarque AS em
+						  INNER JOIN Voo AS vo
+							  ON vo.Id = em.IdVoo
+						  INNER JOIN StatusOperacional AS so
+						      ON so.Id = vo.IdStatusOperacional
+						  WHERE so.Nome = 'Concluido'
+							AND em.IdPassageiro = pa.Id
+				 )
+		AND NOT EXISTS (SELECT  1
+							FROM Embarque AS em2
+								INNER JOIN Voo AS vo2
+									ON vo2.Id = em2.IdVoo
+								INNER JOIN StatusOperacional AS so2
+									ON so2.Id = vo2.IdStatusOperacional
+								WHERE so2.Nome != 'Concluido'
+									AND em2.IdPassageiro = pa.Id
+								GROUP BY so2.Nome
+								HAVING COUNT(*) >= (SELECT  COUNT(*)
+														FROM Embarque AS em3
+															INNER JOIN Voo AS vo3
+																ON vo3.Id = em3.IdVoo
+															INNER JOIN StatusOperacional AS so3
+																ON so3.Id = vo3.IdStatusOperacional
+														WHERE so3.Nome = 'Concluido'
+															AND em3.IdPassageiro = pa.Id
+												   )
+				       );
+
+-- Implementando a contagem junto ao nome do passageiro
+
+SELECT	pa.NomeCompleto as Passageiro,
+		(SELECT  COUNT(vo4.Id)
+			FROM Embarque AS em4
+				INNER JOIN Voo AS vo4
+					ON vo4.Id = em4.IdVoo
+				INNER JOIN StatusOperacional AS so4
+					ON so4.Id = vo4.IdStatusOperacional
+			WHERE so4.nome = 'Concluido'
+				AND em4.IdPassageiro = pa.Id) as QuantidadeVoosConcluidos
+	FROM Passageiro AS pa
+	WHERE EXISTS (SELECT  1
+					  FROM Embarque AS em
+						  INNER JOIN Voo AS vo
+							  ON vo.Id = em.IdVoo
+						  INNER JOIN StatusOperacional AS so
+						      ON so.Id = vo.IdStatusOperacional
+						  WHERE so.Nome = 'Concluido'
+							AND em.IdPassageiro = pa.Id
+				 )
+		AND NOT EXISTS (SELECT  1
+							FROM Embarque AS em2
+								INNER JOIN Voo AS vo2
+									ON vo2.Id = em2.IdVoo
+								INNER JOIN StatusOperacional AS so2
+									ON so2.Id = vo2.IdStatusOperacional
+								WHERE so2.Nome != 'Concluido'
+									AND em2.IdPassageiro = pa.Id
+								GROUP BY so2.Nome
+								HAVING COUNT(*) >= (SELECT  COUNT(*)
+														FROM Embarque AS em3
+															INNER JOIN Voo AS vo3
+																ON vo3.Id = em3.IdVoo
+															INNER JOIN StatusOperacional AS so3
+																ON so3.Id = vo3.IdStatusOperacional
+														WHERE so3.Nome = 'Concluido'
+															AND em3.IdPassageiro = pa.Id
+												   )
+				       );
