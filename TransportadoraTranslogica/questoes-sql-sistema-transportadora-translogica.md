@@ -6,6 +6,10 @@
 >
 > Conteúdo SQL permitido nas queries: consultas simples, JOINs, CASE WHEN, subqueries (em SELECT, FROM e WHERE), funções de agregação e HAVING. **Não devem ser utilizados** CTEs (`WITH`), *window functions* (`OVER`) nem `STRING_AGG`.
 
+Distribuição das questões: 
+
+* **gabriel-felix** — Q6, Q10, Q26, Q31, Q40, Q47, Q55, Q71, Q78, Q82
+
 ---
 
 ## Bloco 1 (Q1–Q9)

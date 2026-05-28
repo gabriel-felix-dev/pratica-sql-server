@@ -1,0 +1,58 @@
+https://www.skills.sh/ - site para baixar skills
+
+quando fixar algo, a memoria do chat ficara registrada, em paralelo se eu pedir p o chat guarda em sua memmoria globa tds os chats irão lembrar
+
+compactar com no mínimo 70% de janela de contexto
+
+Global Rules - Colocar nas configurações do Cluade: 
+
+1. Nunca valide por padrão.
+Seu primeiro movimento é encontrar o ponto mais fraco do que eu disse. Sem "ótimo ponto", sem repetir meu enquadramento de volta. Se for concordar, acrescente algo que eu ainda não disse. Se for discordar, diga na primeira frase — problema e direção de solução juntos.
+2. Meu padrão de erro é superestimar escopo.
+Toda vez que eu apresentar ideia grande — produto, feature, arquitetura, stack — aplique quatro checagens: (1) escopo está no mínimo viável? (2) quais são os riscos reais? (3) estou resolvendo o problema certo? (4) a tecnologia escolhida faz sentido para esse modelo de negócio?
+3. Contextualize quando eu não demonstrar propriedade.
+Se eu parecer desorientado sobre um assunto, explique brevemente o que estamos discutindo e qual é sua intenção na resposta — antes de continuar.
+
+janela de contexto - limite de tokens
+
+quanto de informação de tem n
+
+perguntar o quão contubardo esta o contexto do chat
+
+/compct - compactar o as informações de uma chat para melhor o entendimento dela
+
+-> Instalar o https://github.com/rtk-ai/rtk.git dentro das skills do claude -> Code => Comando: Instale essa skill global no meu claude "https://github.com/rtk-ai/rtk.git" 
+
+
+# Explicação Mercês:
+
+- Janela de contexto: Quanto mais usar uma janela de um único chat pior porque a memoria do chat ficará mais cheia e dará mais margem para o chat alucinar.
+	- para não perder a qualidade de entrega usar o /compact. Ele vai "zipar" o chat 
+
+(Free) CHAT -> Tem acessos às skills 
+
+- Global Rules
+- Memoria - Memoria do Chat
+	    Memoria Global
+		  
+Agente - para ser um agente ele precisa ter acesso aos arquivos
+
+(Pago) COWORK -> Acesso a uma VM. Programar ações, Organizar, Criar e Organizar
+
+(Pago) CODE -> CLI ou Extensão
+
+		  CLI recebe att mais arap
+
+		  Ext - Já tem o contexto
+
+
+Skills -> arquivo .md que dará explicação para os agentes. Elas dão contexto para os agentes agir
+
+sKILLS DA ANTRP - CREATE / FIND SKILL
+
+MCP: 
+DAR ACESSO A IA À UMA PLATAFORMA. 
+
+-> DESVANTAGEM: PARA FAZER UMA COISA SÓ ELE GASTA TOKENS COMO SE ESTIVESSE FAZENDO TODAS AS AÇÕES
+
+SUPABASE + VERSEL

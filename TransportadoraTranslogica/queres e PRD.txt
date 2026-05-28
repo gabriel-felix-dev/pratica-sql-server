@@ -1,0 +1,17 @@
+- estudar MS SQL
+- proj facul
+- estudat faculdade
+
+
+
+PRD prompt -> SDD + TDD -> ROADMAP com diferenciacoes de complexidade 
+
+
+-> PRD PROMPT: 1° ETAPA PEDE P A IA MONTAR O PROMPT COM UMA BREVE DESCRICAO DO PROJ E PEÇA P ELA MELHORAR ELE FZND UM QUEST DE PERG E RESP
+
+-> SDD(SPEC DRIVEN DEVELOPMENT): Quando o PRD ESTIVER OK, PEDIR COM BASE NO PRD A CONSTRUÇÃO DE UM SDD.
+
+-> ROADMAP com diferenciacoes de complexidade: com o sdd pronto, pedir à ia p montar um roadmap baseado na ideia de integração do app e na complexidade das etapa. 
+
+-> com o road feito, pedir à ia escolher entre os 3 modos (opus, sonnet, haiku) qual deverá ser utilizada para cada etapa e o road deve ser att de acordo com as implementações já feitas no app
+
