@@ -35,5 +35,4 @@ Deve ser feito 4 perguntas:
 - `COUNT()` / `SUM()`: "Número de", "total de", "quantidade"
 - `WHERE` / `HAVING`: "apenas", "somente", "que possuem"
 - `IS NULL` / `NOT EXISTS`: "não possui", "nunca", "ainda não", "sem vínculo"
-
-##
+- `DISTINCT`: Usar em situações que os campos devem ser únicos, como "Nome"

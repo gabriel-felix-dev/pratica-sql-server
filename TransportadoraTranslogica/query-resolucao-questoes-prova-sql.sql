@@ -1,9 +1,13 @@
 SELECT * FROM Cidade;
+SELECT * FROM Estado;
 SELECT * FROM Filial;
 SELECT * FROM Viagem;
 SELECT * FROM Motorista;
+SELECT * FROM Veiculo;
 SELECT * FROM Cliente;
 SELECT * FROM Carga;
+SELECT * FROM TipoCarga;
+SELECT * FROM StatusEnvio;
 
 --1. Liste as cidades que possuem filiais cadastradas e o número de veículos vinculados a viagens com origem nessas filiais,
 --exibindo apenas as cidades que possuem mais de 2 veículos distintos associados.
@@ -19,7 +23,6 @@ SELECT	ci.Nome as Cidade, -- Puxa o nome da cidade
 			ON vi.IdFilialOrigem = fi.Id
 	GROUP BY ci.Nome -- Agrupa por Cidade a contagem
 	HAVING COUNT(DISTINCT vi.IdVeiculo) > 2; -- filtra a quantidade da contagem para os que forem maior que dois
-GO
 
 --2. Liste as cargas com peso superior a 100 kg cujo valor declarado seja maior do que a média de valor declarado das 
 --cargas do mesmo tipo, exibindo o código da carga, o peso e o nome do cliente destinatário.
@@ -35,7 +38,6 @@ SELECT	ca.Codigo as Codigo,
 							         FROM Carga AS ca2
 									 WHERE ca.IdTipoCarga = ca2.IdTipoCarga
 		                        );
-GO
 
 --3. Exiba o nome e o documento (CPF/CNPJ) de todos os clientes destinatários que possuem endereço cadastrado 
 --em cidades que não possuem nenhuma filial física da transportadora.
@@ -51,29 +53,118 @@ SELECT	cl.Nome as Cliente,
 								  ON fi.IdEndereco = ef.Id
 						  WHERE en.IdCidade = ef.IdCidade
 	                 );
-GO
 
 --4. Encontre os motoristas cuja CNH comece com '9' ou termine com '0' e que já realizaram viagens utilizando 
 --veículos com capacidade de peso superior a 10 toneladas, mostrando o nome do motorista e a placa do veículo.
 
-Exibir - nome motorista e placa do veiculo
-Filtro - CNH (LIKE 9% and LIKE 0%) AND já utilizaram Veiculos com capacidade > 10.000 
-Caminho - Motorsta -> Viagem -> Veiculo
+SELECT	DISTINCT mo.Nome as Motorista,	
+		ve.Placa as PlacaVeiculo
+	FROM Motorista AS mo
+		INNER JOIN Viagem AS vi
+			ON vi.IdMotorista = mo.Id
+		INNER JOIN Veiculo AS ve
+			ON ve.Id = vi.IdVeiculo
+	WHERE (mo.CNH LIKE '9%' AND mo.CNH LIKE '%0')
+		AND ve.CapacidadePeso > 10000.00;
+	
+--5. Liste as cargas do tipo 'Fragil' embaladas com 'Isopor' ou 'Plastico Bolha' destinadas a clientes que moram no 
+--estado de Sao Paulo ('SP'), trazendo o código da carga, o nome do cliente e a cidade de residência.
 
-SELECT	*
-	FROM Motorista AS mo	
-		
+SELECT	ca.Codigo as CodigoCarga,
+		cl.Nome as Cliente,
+		ci.Nome as CidadeResidencia
+	FROM Carga AS ca
+		INNER JOIN Cliente AS cl
+			ON cl.Id = ca.IdCliente
+		INNER JOIN Endereco AS en
+			ON en.Id = cl.IdEndereco
+		INNER JOIN Cidade AS ci
+			ON ci.Id = en.IdCidade
+	WHERE ca.IdTipoCarga = 2
+		AND (ca.MaterialEmbalagem = 'Plastico Bolha' OR ca.MaterialEmbalagem = 'Isopor')
+		AND ci.IdEstado = 1;
 
---5. Liste as cargas do tipo 'Fragil' embaladas com 'Isopor' ou 'Plastico Bolha' destinadas a clientes que moram no estado de Sao Paulo ('SP'), trazendo o código da carga, o nome do cliente e a cidade de residência.
---6. Liste o código, o peso e o valor declarado de todas as cargas que ainda não foram associadas a nenhuma viagem, cujo status seja 'Pendente' e que pertençam a clientes que residem no mesmo estado da filial 'Filial Sao Paulo Centro'.
+--6. Liste o código, o peso e o valor declarado de todas as cargas que ainda não foram associadas a nenhuma viagem, 
+--cujo status seja 'Pendente' e que pertençam a clientes que residem no mesmo estado da filial 'Filial Sao Paulo Centro'.
 
+SELECT	ca.Codigo as CodigoCarga,
+		ca.Peso as PesoCarga,
+		ca.ValorDeclarado as ValorDeclaradoCarga
+	FROM Carga AS ca 
+		INNER JOIN Cliente AS cl
+			ON cl.Id = ca.IdCliente
+		INNER JOIN Endereco AS ec -- Endereco CLiente
+			ON ec.Id = cl.IdEndereco
+		INNER JOIN Cidade AS cc -- Cidade CLiente
+			ON cc.Id = ec.IdCidade
+	WHERE ca.IdParadaEntrega IS NULL
+		AND ca.IdStatusEnvio = 1
+		AND cc.IdEstado = (SELECT	cf.IdEstado
+						FROM Filial AS fi
+							INNER JOIN Endereco AS ef -- Endereco Filial
+								ON ef.Id = fi.IdEndereco
+							INNER JOIN Cidade AS cf -- Cidade Filial
+								ON cf.Id = ef.IdCidade
+						WHERE fi.Nome = 'Filial Sao Paulo Centro'
+					);
 
+--7. Exiba os endereços de entrega específicos das cargas localizados no estado de Sao Paulo (UF = 'SP') cujo bairro seja nulo 
+--e que receberam pelo menos uma entrega de carga do tipo 'Perigosa'.
 
---7. Exiba os endereços de entrega específicos das cargas localizados no estado de Sao Paulo (UF = 'SP') cujo bairro seja nulo e que receberam pelo menos uma entrega de carga do tipo 'Perigosa'.
---8. Liste as viagens (ID, data de saída e quilometragem inicial) em que a quilometragem final não foi preenchida, mas a data de chegada está registrada (inconsistência de dados).
---9. Mostre as cargas do tipo "Perigosa" que possuem valor declarado superior a R$ 5.000,00, mas estão sem número ONU ou sem classe de risco cadastrada.
+SELECT	DISTINCT en.Logradouro as EnderecoEntrega
+	FROM Carga AS ca
+		INNER JOIN Endereco AS en
+			ON en.Id = ca.IdEnderecoEntrega
+		INNER JOIN Cidade AS ci
+			ON ci.Id = en.IdCidade
+	WHERE ci.IdEstado = 1
+		AND en.Bairro IS NULL
+	AND EXISTS (SELECT  1
+				    FROM Carga AS ca2
+						WHERE ca2.IdEnderecoEntrega = ca.IdEnderecoEntrega	
+							AND ca2.IdTipoCarga = 3
+			   );
 
---10. Calcule a média de peso e de valor declarado das cargas agrupada pelo nome da cidade do destinatário, exibindo apenas cidades com média de peso superior a 150 kg.
+--8. Liste as viagens (ID, data de saída e quilometragem inicial) em que a quilometragem final não foi preenchida, mas a data de 
+--chegada está registrada (inconsistência de dados).
+
+SELECT	vi.Id as IdentificadorViagem,
+		CAST(vi.DataSaida AS DATE) as DataSaida,
+		vi.QuilometragemInicial as QuilometragemInicial
+	FROM Viagem AS vi
+		WHERE vi.QuilometragemFinal IS NULL
+			AND vi.DataChegada IS NOT NULL;
+
+--9. Mostre as cargas do tipo "Perigosa" que possuem valor declarado superior a R$ 5.000,00, mas estão sem número ONU ou sem classe 
+--de risco cadastrada.
+
+SELECT	ca.Codigo as Codigo
+	FROM Carga AS ca
+	WHERE ca.IdTipoCarga = 3
+		AND ca.ValorDeclarado > 5000.00
+		AND (ca.NumeroONU IS NULL OR ca.ClasseRisco IS NULL);
+
+--10. Calcule a média de peso e de valor declarado das cargas agrupada pelo nome da cidade do destinatário, exibindo apenas cidades 
+--com média de peso superior a 150 kg.
+
+--Exibir - Média de Peso e ValorDeclarado, Nome Cidade
+--De onde - Carga -> Endereco -> Cidade
+--Filtro - Having - Media de peso > 150.00
+--Agrupado - Nome cidade do destinatario 
+
+SELECT  ci.Nome as Cidade,
+	    ROUND(AVG(ca.Peso), 2) as MediaPeso,
+		ROUND(AVG(ca.ValorDeclarado), 2) as MediaValorDeclarado
+	FROM Carga AS ca
+		INNER JOIN Cliente AS cl
+			ON cl.Id = ca.IdCliente
+		INNER JOIN Endereco AS en
+			ON en.Id = cl.IdEndereco
+		INNER JOIN Cidade AS ci
+			ON ci.Id = en.IdCidade
+	GROUP BY ci.Nome
+	HAVING AVG(ca.Peso) > 150.00	
+
 --11. Mostre a quantidade total de viagens realizadas por motorista em veículos cuja capacidade de peso seja maior do que a média geral de capacidade da frota, exibindo o nome do motorista e o total de viagens.
 --12. Mostre o número de clientes que possuem endereço cadastrado no estado do Rio de Janeiro e que já receberam cargas do tipo 'Perigosa' com valor declarado superior a R$ 2.000,00.
 --13. Qual a maior e a menor quilometragem inicial registrada entre os veículos que realizaram viagens que passaram por paradas no estado do Paraná?
