@@ -145,12 +145,7 @@ SELECT	ca.Codigo as Codigo
 		AND (ca.NumeroONU IS NULL OR ca.ClasseRisco IS NULL);
 
 --10. Calcule a média de peso e de valor declarado das cargas agrupada pelo nome da cidade do destinatário, exibindo apenas cidades 
---com média de peso superior a 150 kg.
-
---Exibir - Média de Peso e ValorDeclarado, Nome Cidade
---De onde - Carga -> Endereco -> Cidade
---Filtro - Having - Media de peso > 150.00
---Agrupado - Nome cidade do destinatario 
+--com média de peso superior a 150 kg. 
 
 SELECT  ci.Nome as Cidade,
 	    ROUND(AVG(ca.Peso), 2) as MediaPeso,
@@ -165,8 +160,61 @@ SELECT  ci.Nome as Cidade,
 	GROUP BY ci.Nome
 	HAVING AVG(ca.Peso) > 150.00	
 
---11. Mostre a quantidade total de viagens realizadas por motorista em veículos cuja capacidade de peso seja maior do que a média geral de capacidade da frota, exibindo o nome do motorista e o total de viagens.
---12. Mostre o número de clientes que possuem endereço cadastrado no estado do Rio de Janeiro e que já receberam cargas do tipo 'Perigosa' com valor declarado superior a R$ 2.000,00.
+--11. Mostre a quantidade total de viagens realizadas por motorista em veículos cuja capacidade de peso seja maior do que a 
+--média geral de capacidade da frota, exibindo o nome do motorista e o total de viagens.
+
+SELECT	DISTINCT 
+		mo.Nome as Motorista,
+		COUNT(vi.Id) as TotalViagem
+	FROM Viagem AS vi
+		INNER JOIN Veiculo AS ve
+			ON ve.Id = vi.IdVeiculo
+		INNER JOIN Motorista AS mo
+			ON mo.Id = vi.IdMotorista
+	WHERE ve.CapacidadePeso > (SELECT  AVG(ve2.CapacidadePeso) FROM Veiculo AS ve2)
+	GROUP BY mo.Nome, mo.Id;
+
+--12. Mostre o número de clientes que possuem endereço cadastrado no estado do Rio de Janeiro e que já receberam cargas do tipo 
+--'Perigosa' com valor declarado superior a R$ 2.000,00.
+
+Exibir - QuantidadeCliente
+
+De Onde - Cliente -> Endereco -> Cargas
+					 |-> Cidade
+Filtro - IdEstado = 2 AND IdTipoCarga = 3 AND IdStatusEntregue = 3 AND ValorDeclarado > 2000.
+
+SELECT	COUNT(cl.Id) as QuantidadeCliente		
+	FROM Cliente AS cl
+		INNER JOIN Endereco AS en
+			ON en.Id = cl.IdEndereco
+		INNER JOIN Cidade AS ci
+			ON ci.Id = en.IdCidade
+		INNER JOIN Carga AS ca
+			ON ca.IdCliente = cl.Id
+	WHERE ci.IdEstado = 2
+		AND ca.IdTipoCarga = 3
+		AND ca.IdStatusEnvio = 3
+		AND ca.ValorDeclarado > 2000.00;
+
+		-- correção
+
+		SELECT	COUNT(cl.Id) as NumeroDeClientes
+		FROM Cliente AS cl
+			JOIN Endereco AS en
+				ON cl.IdEndereco = en.Id
+			JOIN Cidade AS ci
+				ON ci.Id = en.IdCidade
+			JOIN Estado AS es
+				ON es.Id = ci.IdEstado
+		WHERE es.UF = 'RJ'
+		AND EXISTS (SELECT 1
+						FROM Carga AS ca2
+							JOIN TipoCarga AS tc2
+								ON tc2.Id = ca2.IdTipoCarga
+						WHERE tc2.Nome = 'Perigosa' AND ca2.ValorDeclarado > 2000 AND cl.Id = ca2.IdCliente
+				   );
+GO
+
 --13. Qual a maior e a menor quilometragem inicial registrada entre os veículos que realizaram viagens que passaram por paradas no estado do Paraná?
 --14. Exiba o valor total declarado em mercadorias para todas as cargas entregues agrupado pelo modelo do veículo utilizado na viagem, listando apenas os modelos que somaram mais de R$ 50.000,00 em entregas.
 --15. Encontre o total de quilômetros rodados acumulados por veículo, somando a diferença entre `QuilometragemFinal` e `QuilometragemInicial` das viagens já concluídas.
