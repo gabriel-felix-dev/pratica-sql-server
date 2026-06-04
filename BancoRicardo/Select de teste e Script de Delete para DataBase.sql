@@ -24,8 +24,8 @@ SELECT    ml.Usuario as IdUsuario,
 
 USE master;
 
-ALTER DATABASE BancoRicardo
+ALTER DATABASE BancoRicardoTeste2
 SET SINGLE_USER
 WITH ROLLBACK IMMEDIATE;
 
-DROP DATABASE BancoRicardo;
+DROP DATABASE BancoRicardoTeste2;
