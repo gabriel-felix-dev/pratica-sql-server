@@ -49,4 +49,54 @@ No mesmo comando que ele deve executar a limpa e criar os dados
 
 */
 
--- 3 CTE's: Nomes do Usuários, Datas e Sucesso / Fracasso
+BEGIN TRANSACTION
+
+BEGIN TRY
+    DECLARE @Dia INT = 0
+    DECLARE @Registro INT = 0
+    DECLARE @IdLogonGerado INT
+    DECLARE @QtdOpcoes INT
+    DECLARE @OpcaoAtual INT
+
+    WHILE @Dia < 10
+    BEGIN
+        SET @Registro = 0
+
+        WHILE @Registro < 100
+        BEGIN
+            INSERT INTO Logon (IdUsuario, DataLogon, Sucesso)
+            VALUES (
+                (SELECT TOP 1 Id FROM Usuario ORDER BY NEWID()),
+                DATEADD(HOUR, @Registro % 24, DATEADD(DAY, -@Dia, CAST(GETDATE() AS DATETIME))),
+                CASE WHEN @Registro % 2 = 0 THEN 1 ELSE 0 END
+            )
+
+            SET @IdLogonGerado = SCOPE_IDENTITY()
+
+            SET @QtdOpcoes = (@Registro % 5) + 1
+            SET @OpcaoAtual = 1
+
+            WHILE @OpcaoAtual <= @QtdOpcoes
+            BEGIN
+                INSERT INTO OpcaoAcionada (IdLogon, IdOpcao, InstanteLogon)
+                VALUES (
+                    @IdLogonGerado,
+                    (@OpcaoAtual % 10) + 1,
+                    DATEADD(MINUTE, @OpcaoAtual, DATEADD(HOUR, @Registro % 24, DATEADD(DAY, -@Dia, CAST(GETDATE() AS DATETIME))))
+                )
+
+                SET @OpcaoAtual = @OpcaoAtual + 1
+            END
+
+            SET @Registro = @Registro + 1
+        END
+
+        SET @Dia = @Dia + 1
+    END
+
+    COMMIT
+END TRY
+BEGIN CATCH
+    ROLLBACK
+    PRINT 'Erro: ' + ERROR_MESSAGE()
+END CATCH
