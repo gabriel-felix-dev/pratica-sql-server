@@ -59,45 +59,137 @@ SELECT	us.Nome as Usuario,
 --## DQL-05
 --Para cada usuário que já logou, mostre o total de logons dele e o **percentual** que representa sobre o total geral de logons. **Proibido** subquery escalar na lista de colunas.
 
-Exibir - Nome Usuario, Total De Vezes que logou, Percentual em comparalção ao total de logons
-De Onde - Usuario, Logons
-Filtro - Sucesso = 1
-
 SELECT	us.Nome as Usuario,
-		COUNT(lo.IdUsuario) as TotalLogons
+		COUNT(lo.IdUsuario) as TotalLogonsUsuario,
+		CAST((COUNT(lo.IdUsuario) * 100.0) / TotalGeralLogons.ValorTotal * 1.0 AS DECIMAL(10,2)) as Percentual
 	FROM Usuario AS us WITH(NOLOCK)
 		INNER JOIN Logon AS lo WITH(NOLOCK)
 			ON lo.IdUsuario = us.Id
 		CROSS JOIN (
 		            SELECT  COUNT(lo2.Id) as ValorTotal
 					   FROM Logon AS lo2 WITH(NOLOCK)
-				   ) AS TotalLogons
+				   ) AS TotalGeralLogons
 	WHERE lo.Sucesso = 1
-	GROUP BY us.Nome, us.Id
+	GROUP BY us.Nome, us.Id, TotalGeralLogons.ValorTotal
+	ORDER BY TotalLogonsUsuario DESC;
 
 --## DQL-06
 --Liste **todas** as opções do cadastro com o total de vezes que cada uma foi acionada (zero para as nunca usadas). Ordene da menos para a mais acionada.
 
+SELECT	op.Nome as Opcao,
+		COUNT(oa.IdOpcao) as TotalDeVezesAcionada
+	FROM Opcao AS op WITH(NOLOCK)
+		LEFT JOIN OpcaoAcionada AS oa WITH(NOLOCK)
+			ON oa.IdOpcao = op.Id
+	GROUP BY op.Nome, op.Id
+	ORDER BY COUNT(oa.IdOpcao) DESC;
+
 --## DQL-07
 --Para **cada** usuário, exiba o nome e um status: `'Sem logon'` se nunca logou, ou a data do seu último logon. Inclua todos os usuários.
+
+SELECT	us.Nome as Usuario,
+		CASE
+			WHEN COUNT(lo.IdUsuario) = 0 THEN 'Sem Logon'
+			ELSE CAST(MAX(lo.DataLogon) AS VARCHAR(20))
+		END as StatusLogon
+	FROM Usuario AS us WITH(NOLOCK)
+		LEFT JOIN Logon AS lo WITH(NOLOCK)
+			ON lo.IdUsuario = us.Id
+	GROUP BY us.Nome, us.Id;
 
 --## DQL-08
 --Liste os usuários que registraram logons em **mais de um ano-calendário** distinto.
 
+SELECT  us.Nome as Usuario,
+		COUNT(DISTINCT DATEPART(YEAR, lo.DataLogon)) as Ano
+	FROM Usuario AS us WITH(NOLOCK)
+		INNER JOIN Logon AS lo WITH(NOLOCK)
+			ON lo.IdUsuario = us.Id
+	GROUP BY us.Id, us.Nome
+	HAVING COUNT(DISTINCT DATEPART(YEAR, lo.DataLogon)) > 1;
+
 --## DQL-09
 --Em um **único** SELECT, sem subconsultas, mostre para cada usuário quantos logons tiveram sucesso e quantos falharam. Inclua usuários sem nenhum logon (0 e 0).
+
+SELECT	us.Nome as Usuario,
+		COUNT(
+		      CASE
+				  WHEN lo.Sucesso = 1 THEN 1
+			  END
+			 ) as QuantidadeSucessoLogons,
+		COUNT(
+		      CASE
+				  WHEN lo.Sucesso = 0 THEN 1
+			  END
+			 ) as QuantidadeFracassoLogons
+	FROM Usuario AS us WITH(NOLOCK)
+		LEFT JOIN Logon AS lo WITH(NOLOCK)
+			ON lo.IdUsuario = us.Id
+	GROUP BY us.Nome, us.Id;
 
 --## DQL-10
 --Liste os **5 usuários** com mais logons bem-sucedidos. Em caso de empate na 5ª posição, todos os empatados devem aparecer.
 
+SELECT  Subconsulta.Usuario as Usuario,
+		Subconsulta.QuantidadeLogons as QuantidadeLogon
+	FROM (
+	      SELECT	us.Nome as Usuario,
+					COUNT(lo.IdUsuario) as QuantidadeLogons,
+					DENSE_RANK() OVER (ORDER BY COUNT(lo.IdUsuario) DESC) as Posicao
+				FROM Usuario AS us WITH(NOLOCK)
+					INNER JOIN Logon AS lo WITH(NOLOCK)
+						ON lo.IdUsuario = us.Id
+				WHERE lo.Sucesso = 1
+				GROUP BY us.Nome, us.Id
+	     ) AS Subconsulta
+	WHERE Subconsulta.Posicao <=5
+	ORDER BY QuantidadeLogon DESC;
 
 --# INSERT (5)
 
 --## INSERT-01
 --Registre um logon bem-sucedido em `2026-06-10` para **cada usuário que ainda não possui nenhum logon**.
 
+INSERT INTO Logon (IdUsuario, DataLogon, Sucesso)
+SELECT  us.Id as Usuario,
+		CAST('2026-06-10' AS DATETIME),
+		1
+	FROM Usuario AS us WITH(NOLOCK)		 
+		LEFT JOIN Logon AS lo WITH(NOLOCK)
+			ON lo.IdUsuario = us.Id
+	GROUP BY us.Nome, us.Id
+	HAVING COUNT(lo.IdUsuario) = 0;
+
 --## INSERT-02
 --Para **cada logon de hoje bem-sucedido**, registre o acionamento das **5 opções mais acionadas** do histórico, no mesmo instante do logon.
+
+;WITH OpcoesMaisAcionadas AS (
+                              SELECT  TOP 5 oa.IdLogon,
+											op.Id,
+											op.Nome as Opcao,
+											COUNT(oa.IdOpcao) as TotalAcionadas
+								  FROM OpcaoAcionada AS oa WITH(NOLOCK)
+									  INNER JOIN Opcao AS op WITH(NOLOCK)
+										  ON op.Id = oa.IdOpcao
+								  GROUP BY op.Nome, op.Id
+								  ORDER BY COUNT(oa.IdOpcao) DESC
+                             ),
+LoginComSucesso AS (
+					SELECT  lo.Id,
+							lo.IdUsuario,
+							lo.DataLogon,
+							lo.Sucesso
+						FROM Logon AS lo WITH(NOLOCK)
+						WHERE CAST(lo.DataLogon AS DATE) = CAST('2026-06-10' AS DATE)
+						    AND lo.Sucesso = 1
+                   )
+INSERT INTO OpcaoAcionada (IdLogon, IdOpcao, InstanteLogon)
+SELECT  ls.Id,
+		om.Id,
+	    ls.DataLogon
+	FROM OpcoesMaisAcionadas AS om
+		INNER JOIN LoginComSucesso AS ls
+			ON ls.Id = om.IdLogon;
 
 --## INSERT-03
 --Crie uma cópia retroativa de todos os logons de hoje, inserindo-os novamente com a data deslocada em **-7 dias**, preservando usuário e status.
@@ -112,6 +204,11 @@ SELECT	us.Nome as Usuario,
 
 --## UPDATE-01
 --Marque como falha (`Sucesso = 0`) todos os logons ocorridos em **horário par** (hora 0, 2, 4, …).
+
+UPDATE lo
+SET lo.Sucesso = 0
+FROM Logon AS lo WITH(NOLOCK)
+WHERE DATEPART(HOUR, lo.DataLogon) % 2 = 0;
 
 --## UPDATE-02
 --Avance em **+3 dias** a `DataLogon` de todos os logons do **usuário que mais logou** no histórico.
@@ -129,6 +226,16 @@ SELECT	us.Nome as Usuario,
 
 --## DELETE-01
 --Remova os logons mal-sucedidos (`Sucesso = 0`), respeitando as dependências de chave estrangeira.
+
+DELETE FROM oa
+FROM Logon AS lo WITH(NOLOCK)
+    INNER JOIN OpcaoAcionada AS oa WITH(NOLOCK)
+        ON oa.IdLogon = lo.Id
+WHERE lo.Sucesso = 0
+
+DELETE FROM lo
+FROM Logon AS lo WITH(NOLOCK)
+WHERE lo.Sucesso = 0;
 
 --## DELETE-02
 --Apague todos os logons (e suas dependências) dos usuários que **nunca** tiveram um logon bem-sucedido.
