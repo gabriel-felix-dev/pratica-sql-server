@@ -3,10 +3,10 @@
 -- Objetivo: DDL completo das tabelas da Fábrica de Móveis Customizados
 -- =========================================================================
 
-CREATE DATABASE woodcraft;
+CREATE DATABASE WoodCraft;
 GO
 
-USE woodcraft;
+USE WoodCraft;
 GO
 
 -- 1. Tabela de Clientes

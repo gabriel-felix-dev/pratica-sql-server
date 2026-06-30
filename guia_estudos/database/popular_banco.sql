@@ -3,7 +3,7 @@
 -- Objetivo: Inserir dados de teste para simulações e exercícios
 -- =========================================================================
 
-USE woodcraft;
+USE WoodCraft;
 GO
 
 -- 1. Inserir Tipos de Movimentação
