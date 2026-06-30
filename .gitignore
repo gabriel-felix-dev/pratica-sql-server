@@ -1,0 +1,3 @@
+# Ignore pastas especificas a pedido do usuario
+.agents/
+exercicios/gabarito/
