@@ -36,13 +36,13 @@ CREATE OR ALTER PROCEDURE [dbo].[SP_ConsultarMovelFiltros]
 						SELECT  Id,
 								Nome
 							FROM [dbo].[Produto] WITH(NOLOCK)
-							WHERE '
+							WHERE 1=1'
 		SET @Where = 0
 
 		-- Adicionar filtro caso o parametro seja informado
 		IF @NomeFiltro IS NOT NULL
 			BEGIN
-				SET @Comando = @Comando + N'Nome LIKE @pNomeFiltro'
+				SET @Comando = @Comando + N' AND Nome LIKE @pNomeFiltro'
 				SET @Where = 1
 			END
 
@@ -50,10 +50,10 @@ CREATE OR ALTER PROCEDURE [dbo].[SP_ConsultarMovelFiltros]
 		SET @Parametros = N'@pNomeFiltro VARCHAR(100)'
 
 		-- Verificar se ha parametros (exemplo de validacao)
-		IF RIGHT(@Comando, 1) = ' '
-			BEGIN
-				RETURN 1
-			END
+		--IF RIGHT(@Comando, 1) = ' '
+		--	BEGIN
+		--		RETURN 1
+		--	END
 
 		-- Executar comando
 			EXEC sp_executesql @Comando,
@@ -65,5 +65,10 @@ CREATE OR ALTER PROCEDURE [dbo].[SP_ConsultarMovelFiltros]
 
 -- -> Comandos para execução
 
-EXEC [dbo].[SP_ConsultarMovelFiltros];
+DECLARE @Retorno INT;
+
+EXEC @Retorno = [dbo].[SP_ConsultarMovelFiltros];
+SELECT  @Retorno as Retorno;
+
+EXEC [dbo].[SP_ConsultarMolvelFiltros];
 EXEC [dbo].[SP_ConsultarMovelFiltros] @NomeFiltro = '%Carvalho%';
