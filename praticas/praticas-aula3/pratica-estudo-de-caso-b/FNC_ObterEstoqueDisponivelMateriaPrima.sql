@@ -20,5 +20,10 @@ CREATE OR ALTER FUNCTION [dbo].[FNC_ObterEstoqueDisponivelMateriaPrima] (@IdMate
 								   SELECT  DATEDIFF(MILLISECOND, @DataInicio, GETDATE()) as TempoExecucao;
 	*/
 	BEGIN
+		-- Declarar variaveis
+		DECLARE @Quantidade INT = 0
+
+		-- Obter quantidade fisica
+		-- Retornar valor
 	END
 GO
