@@ -1,6 +1,8 @@
 USE WoodCraft;
 GO
 
+-- Função Escalar: no final ela retorna um valor único
+
 CREATE OR ALTER FUNCTION [dbo].[FNC_ObterEstoqueDisponivelMateriaPrima] (@IdMateriaPrima INT)
 	RETURNS INT
 	AS
@@ -24,6 +26,11 @@ CREATE OR ALTER FUNCTION [dbo].[FNC_ObterEstoqueDisponivelMateriaPrima] (@IdMate
 		DECLARE @Quantidade INT = 0
 
 		-- Obter quantidade fisica
+		SELECT  @Quantidade = QuantidadeFisica
+			FROM [dbo].[EstoqueMateriaPrima] WITH(NOLOCK)
+			WHERE IdMateriaPrima = @IdMateriaPrima;
+
 		-- Retornar valor
+		RETURN ISNULL(@Quantidade, 0);
 	END
 GO
