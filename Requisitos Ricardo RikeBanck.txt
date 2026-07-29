@@ -1,0 +1,20 @@
+Rike Bank:
+
+- Agência
+- C. Corrente |- Poupança---------------------------------|
+              |- Saldo                                    |
+              |- Movimentação |- Tipo                     |
+                              |- Origem                   |
+                                                          |
+                                                          |
+- Cliente     |- Dependente                               |  
+- C. Crédito                                              |
+- C. Débito                                               |
+- Chave Pix                                               |
+- Limites     |- Cheque Especial                          |
+              |- Cartão Crédito                           |
+              |- Pix                                      |
+                                                          |
+- Operações   |- Empréstimo                               |
+              |- Consórcio                                |
+              |- Investimentos <--------------------------| 
