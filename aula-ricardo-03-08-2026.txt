@@ -1,0 +1,4 @@
+cada tabela deve ter sua auditoria, quem criou, quando criou, quem alterou e quando alterou
+
+
+tabela domínio, tabela que tem registro automático do sistema.

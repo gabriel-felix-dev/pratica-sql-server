@@ -1,0 +1,1943 @@
+{
+  "tables": [
+    {
+      "id": "IoUmNR9ktbR6WiofHVM_B",
+      "name": "Investimento",
+      "x": 1978.2545377661604,
+      "y": -704.0686940534615,
+      "locked": true,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "H4lP_AqEe47bxEVcqacBg"
+        },
+        {
+          "id": "gWciTZ6E9V8F1eypvwdaV",
+          "name": "IdConta",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "fUwOkwz74u0CQpKbAI1dn",
+          "name": "IdTipoInvestimento",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "pODrXxMlo4l34IAAi4V92",
+          "name": "IdSituacaoInvestimento",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "_JFnjcql4vZFxitsNWFr1",
+          "name": "DataAplicacao",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "HxpXp_woVnOe1CTbuxD9M",
+          "name": "ValorAplicado",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "0mR3Ih_m6HPEZWDFbjr9V",
+          "name": "DataVencimento",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "NRBhOBSXRpca-6KNoyftt",
+          "name": "TaxaRentabilidade",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#7a1717",
+      "collapsed": false
+    },
+    {
+      "id": "gTNMjYDyqbQpFgZ4qu4kj",
+      "name": "TipoInvestimento",
+      "x": 2554.279378608801,
+      "y": -643.6824019153555,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "NXDqllkug5D2HCoNbcN5O",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "ekP-jMBgo9J1zNxY6bEPV",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "boBLR0Bu2SK0rDVEgtO24",
+          "name": "Descricao",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#7a1717",
+      "collapsed": false
+    },
+    {
+      "id": "UsU2lsrnQ90ynFFRCTf8D",
+      "name": "SituacaoInvestimento",
+      "x": 2580.9394302497967,
+      "y": -436.6824019153556,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "BMsIqkW413DPJlNLFFcL4",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Bpi9meD10uV2TVuBt37y2",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "j0AAtq1V_Wu2faLz4Gjv1",
+          "name": "Descricao",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#7a1717",
+      "collapsed": false
+    },
+    {
+      "id": "3hNHlQqE28GWSUdgrKueR",
+      "name": "MovimentacaoInvestimento",
+      "x": 2523.072591446474,
+      "y": -940.3424535563518,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "viULXFoZCh6XQmTfNJVOG"
+        },
+        {
+          "id": "ie5xEk7FDapP8dkxdZ4BZ",
+          "name": "IdInvestimento",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "y15hm4Uv-IYwIaoRVqXF2",
+          "name": "IdTipoMovimentacaoInvestimento",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "08EXuxZ9SLfVEsiTlQG8X",
+          "name": "DataMovimentacao",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "jNRD7R7RXm0BHVNtYS-Bw",
+          "name": "Valor",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#7a1917",
+      "collapsed": false
+    },
+    {
+      "id": "9kdEeWerNHqxVuk4AQktQ",
+      "name": "TipoMovimentacaoInvestimento",
+      "x": 3010.0725914464747,
+      "y": -772.3424535563531,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "YazwLafz8hKsBKlOV6MFA",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "WJQZ5G5-nsRushTalsqMh",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#7a1717",
+      "collapsed": false
+    },
+    {
+      "id": "10nTkhLZpnHi3ErQK0jMB",
+      "name": "ProdutoCDB",
+      "x": 386.5660515722898,
+      "y": 248.34795368998857,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "JIqde0SL_4HMtKfYgvAZn"
+        },
+        {
+          "id": "aE55y9avvolImqSCW5lgu",
+          "name": "IdProdutoFinanceiro",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "nLHDyohbDcsyaaWOY6jkH",
+          "name": "PercentualCDI",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "19zCCYQH2esBTP3MbB97p",
+          "name": "Liquidez",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "yhWQDQOLxfYC7K4LmnWT0",
+          "name": "DataVencimento",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "8JlfF1J3JnKbyfht67wBB",
+      "name": "ProdutoTesouro",
+      "x": 390.5200939881662,
+      "y": 526.5352626050337,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "wHiYgRrrd222k4gT4Goq6"
+        },
+        {
+          "id": "3cEFsCglzeWXnDHv2g0ZQ",
+          "name": "IdProdutoFinanceiro",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "ylc4iyC98H1JM2M_U2Jbm",
+          "name": "TipoTitulo",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "gT00qZfpfy2YVVCi_q4oz",
+          "name": "Indexador",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "zujM4ZA-iEZB1oWf57Yo9",
+          "name": "DataVencimento",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "-x3Fnehx_xcic8DJb5EUS",
+      "name": "ProdutoFinanceiro",
+      "x": -365.5455526475584,
+      "y": 436.44863295368043,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "_fnKWj54bFLNdM1LUYSAQ"
+        },
+        {
+          "id": "zNMwr-YyBm0qIgRNEKUhE",
+          "name": "IdTipoProduto",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Mz2BcKneJYOHJTrJXzlLR",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "ABUJ7d8Jq2RwHfWdi49K5",
+      "name": "ProdutoAcao",
+      "x": 287.74954355188777,
+      "y": -37.95557560480847,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "rTDlPemsoJEUvYbX6TR_y"
+        },
+        {
+          "id": "7qonuWZg3p2VkcABjOQT9",
+          "name": "IdProdutoFinanceiro",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "27FOiWuOVuES5UR2NTq1K",
+          "name": "Ticker",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "OApQL5UpY3cQ-mSSGncw2",
+          "name": "Bolsa",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "2y_Bvt2WDluD-o5fk8u9E",
+          "name": "Empresa",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "6XclGVx2jgbpXZTdTIaOd",
+      "name": "ProdutoFundo",
+      "x": 286.6522998788412,
+      "y": 828.8847830097528,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "VOVEh_zAzrlQM6GGoMSg5"
+        },
+        {
+          "id": "eAhdqBoXGG89CnmTV5tCB",
+          "name": "IdProdutoFinanceiro",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "DaqYCsjD9gXmzJqdMw7j8",
+          "name": "Administrador",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "7MpeyoqO96f12G8FwIygB",
+          "name": "Gestor",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "tgo6diujhSPtbDfprHPrj",
+          "name": "TaxaAdminstracao",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "ZRKC7Bo7K0avRttTIEvQd",
+          "name": "TaxaPerformace",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "q0YKcu_iTtlTFa9juTfXx",
+      "name": "TipoProdutoFinanceiro",
+      "x": -454.97565417221415,
+      "y": 710.4658090684554,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "0gsTct_kheup4xE2zlXlB",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "hjNTumStR9jhe6AHvTfdy",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "HzsV38f2EZ2Aa9Abf-Spm",
+      "name": "Investimento",
+      "x": -962.9119145021621,
+      "y": 189.82547059064126,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "k_BUw-AJ4SKtH31BRMYOf"
+        },
+        {
+          "id": "pY5t3WpGpy1VuSNVpyPn_",
+          "name": "IdConta",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Aut2XKT08Dmp0a9QczXib",
+          "name": "IdSituacaoInvestimento",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "wx5Mj1QpOurMO7VRYQp7K",
+          "name": "IdProdutoFinanceiro",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "NjclN73Lfhbk4sgfgO45d",
+          "name": "DataAplicacao",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "vWkrbWHJRSfiOrSlhV_3x",
+          "name": "ValorAplicado",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "CgXXokZko_EmaOl8Owf6g",
+      "name": "SituacaoInvestimento",
+      "x": -1438.5261970664926,
+      "y": 410.63849059918607,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "BMsIqkW413DPJlNLFFcL4",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Bpi9meD10uV2TVuBt37y2",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "pL5U728zeHH-XPXR8E0Lv",
+      "name": "Conta",
+      "x": 1415.3380526989479,
+      "y": -547.941331238601,
+      "locked": true,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "ekywXHfRFT7bu9655T27n"
+        },
+        {
+          "id": "g2l40CwDQQsu26mDPpoL6",
+          "name": "IdAgencia",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "YEqcya2oGBvSetDM9Jw9H",
+          "name": "IdTipoConta",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "TQ_5QMEobJO1lLY46Mc2R",
+          "name": "IdSituacaoConta",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Zgn74Wh0Hr-SeLaOsr7VI",
+          "name": "Numero",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "jdpupPrQikvTW98GjqWHy",
+          "name": "SaldoAtual",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#7a1717",
+      "collapsed": false
+    },
+    {
+      "id": "7r7GXfe4_yiYWVaipeMYQ",
+      "name": "Conta",
+      "x": -1561.8496945190152,
+      "y": 12.748162498464012,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "ekywXHfRFT7bu9655T27n"
+        },
+        {
+          "id": "g2l40CwDQQsu26mDPpoL6",
+          "name": "IdAgencia",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "YEqcya2oGBvSetDM9Jw9H",
+          "name": "IdTipoConta",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "TQ_5QMEobJO1lLY46Mc2R",
+          "name": "IdSituacaoConta",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Zgn74Wh0Hr-SeLaOsr7VI",
+          "name": "Numero",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "jdpupPrQikvTW98GjqWHy",
+          "name": "SaldoAtual",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "_kuBpdjUgwIDGFBc2IUqk",
+      "name": "Conta",
+      "x": -1446.5950240717734,
+      "y": -844.6765475714756,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "ekywXHfRFT7bu9655T27n"
+        },
+        {
+          "id": "g2l40CwDQQsu26mDPpoL6",
+          "name": "IdAgencia",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "YEqcya2oGBvSetDM9Jw9H",
+          "name": "IdTipoConta",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "TQ_5QMEobJO1lLY46Mc2R",
+          "name": "IdSituacaoConta",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Zgn74Wh0Hr-SeLaOsr7VI",
+          "name": "Numero",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "jdpupPrQikvTW98GjqWHy",
+          "name": "SaldoAtual",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#171c7a",
+      "collapsed": false
+    },
+    {
+      "id": "xQfF4c7lsKarbs_EfJ09Y",
+      "name": "SituacaoInvestimento",
+      "x": -958.7958172340394,
+      "y": -534.441411846321,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "BMsIqkW413DPJlNLFFcL4",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Bpi9meD10uV2TVuBt37y2",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#23177a",
+      "collapsed": false
+    },
+    {
+      "id": "icn4Ff4UgS1wk6Uv3gEsp",
+      "name": "Investimento",
+      "x": -899.3635664639419,
+      "y": -835.3348823266301,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "k_BUw-AJ4SKtH31BRMYOf"
+        },
+        {
+          "id": "pY5t3WpGpy1VuSNVpyPn_",
+          "name": "IdConta",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Aut2XKT08Dmp0a9QczXib",
+          "name": "IdSituacaoInvestimento",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "wx5Mj1QpOurMO7VRYQp7K",
+          "name": "IdProdutoFinanceiro",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "NjclN73Lfhbk4sgfgO45d",
+          "name": "DataAplicacao",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "vWkrbWHJRSfiOrSlhV_3x",
+          "name": "ValorAplicado",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#1e177a",
+      "collapsed": false
+    },
+    {
+      "id": "huF1cv1nWIZWdBZT_yApq",
+      "name": "TipoProdutoFinanceiro",
+      "x": 94.6663012471812,
+      "y": -737.1023613713973,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "0gsTct_kheup4xE2zlXlB",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "hjNTumStR9jhe6AHvTfdy",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#17197a",
+      "collapsed": false
+    },
+    {
+      "id": "gHrskoDZIitYRXj9KeUnd",
+      "name": "ProdutoFinanceiro",
+      "x": -405.92960597370615,
+      "y": -833.5743483266117,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "_fnKWj54bFLNdM1LUYSAQ"
+        },
+        {
+          "id": "zNMwr-YyBm0qIgRNEKUhE",
+          "name": "IdTipoProduto",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "Mz2BcKneJYOHJTrJXzlLR",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "TcYpREcGNEAtz58zasFvN",
+          "name": "DataVencimento",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "4TkusDteHSvu_kKQFmBdY",
+          "name": "Liquidez",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        },
+        {
+          "id": "lI4Ti2tWyIgxO-CzyoxWc",
+          "name": "Rentabilidade",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#17197a",
+      "collapsed": false
+    },
+    {
+      "id": "Z3MHzaSwkgTrGR0X3PUzv",
+      "name": "MovimentacaoInvestimento",
+      "x": -417.7242528537771,
+      "y": -102.21416540252073,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "39JFGWWiZX-xtp-JZC7hg"
+        },
+        {
+          "id": "OgesEO0SMxvdJkv0KiljA",
+          "name": "IdInvestimento",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "UN5xfwqQ15PPtHEk3zCHs",
+          "name": "IdTipoMovimentacaoInvestimento",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "HZEqFokcvy4b_U7RejS8-",
+          "name": "DataMovimentacao",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "z0M97M2-QY7IobfaApcqa",
+          "name": "Valor",
+          "type": "DECIMAL",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "MBy_rhDyM-3lKL2PjtDox",
+          "name": "Descricao",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    },
+    {
+      "id": "TGzBg94ZT3x5z7N5xSrjU",
+      "name": "TipoMovimentacaoInvestimento",
+      "x": 82.1054097883383,
+      "y": -224.79640317500835,
+      "locked": false,
+      "fields": [
+        {
+          "name": "Id",
+          "type": "TINYINT",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": false,
+          "unsigned": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": "V_8JY3UEYNKNeLp6kwyWn",
+          "size": "",
+          "values": []
+        },
+        {
+          "id": "RkBFCdWnmjYm2WZMe3a7D",
+          "name": "Nome",
+          "type": "VARCHAR",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": "",
+          "size": 255
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "uniqueConstraints": [],
+      "color": "#175e7a",
+      "collapsed": false
+    }
+  ],
+  "relationships": [
+    {
+      "startTableId": "pL5U728zeHH-XPXR8E0Lv",
+      "startFieldId": "ekywXHfRFT7bu9655T27n",
+      "endTableId": "IoUmNR9ktbR6WiofHVM_B",
+      "endFieldId": "gWciTZ6E9V8F1eypvwdaV",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "ekywXHfRFT7bu9655T27n",
+          "endFieldId": "gWciTZ6E9V8F1eypvwdaV"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_Conta_Id_Investimento",
+      "id": "FSGt9Fniu7ZCFMCiT4Alq"
+    },
+    {
+      "startTableId": "gTNMjYDyqbQpFgZ4qu4kj",
+      "startFieldId": "NXDqllkug5D2HCoNbcN5O",
+      "endTableId": "IoUmNR9ktbR6WiofHVM_B",
+      "endFieldId": "fUwOkwz74u0CQpKbAI1dn",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "NXDqllkug5D2HCoNbcN5O",
+          "endFieldId": "fUwOkwz74u0CQpKbAI1dn"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_TipoInvestimento_Id_Investimento",
+      "id": "A6-ZDvb_RNh1SjNPGwjsA"
+    },
+    {
+      "startTableId": "IoUmNR9ktbR6WiofHVM_B",
+      "startFieldId": "pODrXxMlo4l34IAAi4V92",
+      "endTableId": "UsU2lsrnQ90ynFFRCTf8D",
+      "endFieldId": "BMsIqkW413DPJlNLFFcL4",
+      "cardinality": "many_to_one",
+      "fields": [
+        {
+          "startFieldId": "pODrXxMlo4l34IAAi4V92",
+          "endFieldId": "BMsIqkW413DPJlNLFFcL4"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_Investimento_IdSituacaoInvestimento_TipoSituacaoInvestimento",
+      "id": "8EkBQYoqq18DmVcozPHCV"
+    },
+    {
+      "startTableId": "3hNHlQqE28GWSUdgrKueR",
+      "startFieldId": "y15hm4Uv-IYwIaoRVqXF2",
+      "endTableId": "9kdEeWerNHqxVuk4AQktQ",
+      "endFieldId": "YazwLafz8hKsBKlOV6MFA",
+      "cardinality": "many_to_one",
+      "fields": [
+        {
+          "startFieldId": "y15hm4Uv-IYwIaoRVqXF2",
+          "endFieldId": "YazwLafz8hKsBKlOV6MFA"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_MovimentacaoInvestimento_IdTipoMovimentacaoInvestimento_TipoMovimentacaoInvestimento",
+      "id": "oCh6S7g7dhYr8IvektmC8"
+    },
+    {
+      "startTableId": "3hNHlQqE28GWSUdgrKueR",
+      "startFieldId": "ie5xEk7FDapP8dkxdZ4BZ",
+      "endTableId": "IoUmNR9ktbR6WiofHVM_B",
+      "endFieldId": "H4lP_AqEe47bxEVcqacBg",
+      "cardinality": "many_to_one",
+      "fields": [
+        {
+          "startFieldId": "ie5xEk7FDapP8dkxdZ4BZ",
+          "endFieldId": "H4lP_AqEe47bxEVcqacBg"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_MovimentacaoInvestimento_IdInvestimento_Investimento",
+      "id": "z2Wn463rZSUeiyu0Atx2J"
+    },
+    {
+      "startTableId": "q0YKcu_iTtlTFa9juTfXx",
+      "startFieldId": "0gsTct_kheup4xE2zlXlB",
+      "endTableId": "-x3Fnehx_xcic8DJb5EUS",
+      "endFieldId": "zNMwr-YyBm0qIgRNEKUhE",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "0gsTct_kheup4xE2zlXlB",
+          "endFieldId": "zNMwr-YyBm0qIgRNEKUhE"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_TipoProdutoFinanceiro_Id_ProdutoFinanceiro",
+      "id": "itaIh994ppkO_ZFQKwL3A"
+    },
+    {
+      "startTableId": "-x3Fnehx_xcic8DJb5EUS",
+      "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+      "endTableId": "ABUJ7d8Jq2RwHfWdi49K5",
+      "endFieldId": "7qonuWZg3p2VkcABjOQT9",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+          "endFieldId": "7qonuWZg3p2VkcABjOQT9"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_ProdutoFinanceiro_Id_ProdutoAcao",
+      "id": "ueENsqnDsfQPuTRPQ8ely"
+    },
+    {
+      "startTableId": "-x3Fnehx_xcic8DJb5EUS",
+      "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+      "endTableId": "10nTkhLZpnHi3ErQK0jMB",
+      "endFieldId": "aE55y9avvolImqSCW5lgu",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+          "endFieldId": "aE55y9avvolImqSCW5lgu"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_ProdutoFinanceiro_Id_ProdutoCDB",
+      "id": "jVSOncBs2FkRQ8N3OzO_0"
+    },
+    {
+      "startTableId": "-x3Fnehx_xcic8DJb5EUS",
+      "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+      "endTableId": "8JlfF1J3JnKbyfht67wBB",
+      "endFieldId": "3cEFsCglzeWXnDHv2g0ZQ",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+          "endFieldId": "3cEFsCglzeWXnDHv2g0ZQ"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_ProdutoFinanceiro_Id_ProdutoTesouro",
+      "id": "fmBp9BIFo0s3VwfNmQSao"
+    },
+    {
+      "startTableId": "-x3Fnehx_xcic8DJb5EUS",
+      "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+      "endTableId": "6XclGVx2jgbpXZTdTIaOd",
+      "endFieldId": "eAhdqBoXGG89CnmTV5tCB",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+          "endFieldId": "eAhdqBoXGG89CnmTV5tCB"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_ProdutoFinanceiro_Id_ProdutoFundo",
+      "id": "0BECVTNgWMlGnSEzb4lRF"
+    },
+    {
+      "startTableId": "-x3Fnehx_xcic8DJb5EUS",
+      "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+      "endTableId": "HzsV38f2EZ2Aa9Abf-Spm",
+      "endFieldId": "wx5Mj1QpOurMO7VRYQp7K",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+          "endFieldId": "wx5Mj1QpOurMO7VRYQp7K"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_ProdutoFinanceiro_Id_Investimento",
+      "id": "43jEL0gEwnMWjhp6mEUr8"
+    },
+    {
+      "startTableId": "CgXXokZko_EmaOl8Owf6g",
+      "startFieldId": "BMsIqkW413DPJlNLFFcL4",
+      "endTableId": "HzsV38f2EZ2Aa9Abf-Spm",
+      "endFieldId": "Aut2XKT08Dmp0a9QczXib",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "BMsIqkW413DPJlNLFFcL4",
+          "endFieldId": "Aut2XKT08Dmp0a9QczXib"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_SituacaoInvestimento_Id_Investimento",
+      "id": "lKI7EU9-9imSMW4IZVAa7"
+    },
+    {
+      "startTableId": "7r7GXfe4_yiYWVaipeMYQ",
+      "startFieldId": "ekywXHfRFT7bu9655T27n",
+      "endTableId": "HzsV38f2EZ2Aa9Abf-Spm",
+      "endFieldId": "pY5t3WpGpy1VuSNVpyPn_",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "ekywXHfRFT7bu9655T27n",
+          "endFieldId": "pY5t3WpGpy1VuSNVpyPn_"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_Conta_Id_Investimento",
+      "id": "dP0wKge9o2XJl7-W2_2GR"
+    },
+    {
+      "startTableId": "_kuBpdjUgwIDGFBc2IUqk",
+      "startFieldId": "ekywXHfRFT7bu9655T27n",
+      "endTableId": "icn4Ff4UgS1wk6Uv3gEsp",
+      "endFieldId": "pY5t3WpGpy1VuSNVpyPn_",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "ekywXHfRFT7bu9655T27n",
+          "endFieldId": "pY5t3WpGpy1VuSNVpyPn_"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_Conta_Id_Investimento",
+      "id": "hEtnRMzY8-b_hRJAXW04u"
+    },
+    {
+      "startTableId": "xQfF4c7lsKarbs_EfJ09Y",
+      "startFieldId": "BMsIqkW413DPJlNLFFcL4",
+      "endTableId": "icn4Ff4UgS1wk6Uv3gEsp",
+      "endFieldId": "Aut2XKT08Dmp0a9QczXib",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "BMsIqkW413DPJlNLFFcL4",
+          "endFieldId": "Aut2XKT08Dmp0a9QczXib"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_SituacaoInvestimento_Id_Investimento",
+      "id": "4KW05zfcT1hgLH6vbVyL5"
+    },
+    {
+      "startTableId": "icn4Ff4UgS1wk6Uv3gEsp",
+      "startFieldId": "wx5Mj1QpOurMO7VRYQp7K",
+      "endTableId": "gHrskoDZIitYRXj9KeUnd",
+      "endFieldId": "_fnKWj54bFLNdM1LUYSAQ",
+      "cardinality": "many_to_one",
+      "fields": [
+        {
+          "startFieldId": "wx5Mj1QpOurMO7VRYQp7K",
+          "endFieldId": "_fnKWj54bFLNdM1LUYSAQ"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_Investimento_IdProdutoFinanceiro_ProdutoFinanceiro",
+      "id": "WxUfSbj7wRORtuM9mwKYd"
+    },
+    {
+      "startTableId": "gHrskoDZIitYRXj9KeUnd",
+      "startFieldId": "zNMwr-YyBm0qIgRNEKUhE",
+      "endTableId": "huF1cv1nWIZWdBZT_yApq",
+      "endFieldId": "0gsTct_kheup4xE2zlXlB",
+      "cardinality": "many_to_one",
+      "fields": [
+        {
+          "startFieldId": "zNMwr-YyBm0qIgRNEKUhE",
+          "endFieldId": "0gsTct_kheup4xE2zlXlB"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_ProdutoFinanceiro_IdTipoProduto_TipoProdutoFinanceiro",
+      "id": "Fdhnutg6hwaJmdqz_W_oQ"
+    },
+    {
+      "startTableId": "HzsV38f2EZ2Aa9Abf-Spm",
+      "startFieldId": "k_BUw-AJ4SKtH31BRMYOf",
+      "endTableId": "Z3MHzaSwkgTrGR0X3PUzv",
+      "endFieldId": "OgesEO0SMxvdJkv0KiljA",
+      "cardinality": "one_to_many",
+      "fields": [
+        {
+          "startFieldId": "k_BUw-AJ4SKtH31BRMYOf",
+          "endFieldId": "OgesEO0SMxvdJkv0KiljA"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_Investimento_Id_MovimentacaoInvestimento",
+      "id": "Yh9Fku96GLUE7MpuEJYok"
+    },
+    {
+      "startTableId": "Z3MHzaSwkgTrGR0X3PUzv",
+      "startFieldId": "UN5xfwqQ15PPtHEk3zCHs",
+      "endTableId": "TGzBg94ZT3x5z7N5xSrjU",
+      "endFieldId": "V_8JY3UEYNKNeLp6kwyWn",
+      "cardinality": "many_to_one",
+      "fields": [
+        {
+          "startFieldId": "UN5xfwqQ15PPtHEk3zCHs",
+          "endFieldId": "V_8JY3UEYNKNeLp6kwyWn"
+        }
+      ],
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "fk_MovimentacaoInvestimento_IdTipoMovimentacaoInvestimento_TipoMovimentacaoInvestimento",
+      "id": "CXb9yXQRrVyTdAbc7AAN9"
+    }
+  ],
+  "notes": [],
+  "subjectAreas": [],
+  "database": "transactsql",
+  "title": "investimento-rikebank"
+}
