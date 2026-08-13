@@ -17,30 +17,17 @@ CREATE OR ALTER PROCEDURE [dbo].[SP_PesquisarCliente]
 								   DECLARE @Retorno INT,
 								           @DataInicio DATETIME = GETDATE();
 								   
-								   EXEC @Retorno = [dbo].[SP_PesquisarCliente];
+								   -- EXEC @Retorno = [dbo].[SP_PesquisarCliente];
 
-								   -- EXEC @Retorno = [dbo].[SP_PesquisarCliente] @NomeFiltro = 'Gabriel';
+								   EXEC @Retorno = [dbo].[SP_PesquisarCliente] @NomeFiltro = 'Mobi';
 
 								   SELECT  @Retorno As RetornoConsulta,
-										   DATEDIFF(MILLSECOND, @DataInicio, GETDATE());							   
+										   DATEDIFF(MILLISECOND, @DataInicio, GETDATE()) as TempoExecucao;							   
 								   
 		Retorno..................: 0 - Sucesso
 		                           1 - Cliente não cadastrado
 	*/
 	BEGIN
-		-- Declarar variaveis para consulta
-		DECLARE @Filtro NVARCHAR(MAX);
-
-		-- Validar se o nome existe na tabela Cliente
-
-		IF NOT EXISTS (
-					      SELECT  TOP 1 1
-							  FROM [dbo].[Cliente] AS cl WITH(NOLOCK)
-							  WHERE cl.Nome LIKE @NomeFiltro
-		              )
-			BEGIN
-				RETURN 1
-			END
 
 		-- Validar se o parametro é nulo
 		IF @NomeFiltro IS NULL
@@ -55,11 +42,29 @@ CREATE OR ALTER PROCEDURE [dbo].[SP_PesquisarCliente]
 				RETURN 0
 			END
 
+		---- Validar se o nome existe na tabela Cliente
+
+		IF NOT EXISTS (
+					      SELECT  TOP 1 1
+							  FROM [dbo].[Cliente] AS cl WITH(NOLOCK)
+							  WHERE cl.Nome LIKE '%' + @NomeFiltro + '%'
+		              )
+			BEGIN
+				RETURN 1
+			END
+
 		-- Realizar consulta com filtro
 		IF @NomeFiltro IS NOT NULL
 			BEGIN
-				
+				-- Realizar consulta com filtro
+				SELECT  Id,
+						Nome,
+						Documento,
+						Telefone,
+						TipoCLiente
+					FROM [dbo].[Cliente] WITH(NOLOCK)
+					WHERE Nome LIKE '%' + @NomeFiltro + '%'
 				RETURN 0
-			END	 
+			END	
 	END
 GO
