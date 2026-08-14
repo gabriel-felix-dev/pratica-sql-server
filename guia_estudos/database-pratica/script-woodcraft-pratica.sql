@@ -12,7 +12,14 @@ GO
 -- 1. Tabela de Clientes
 CREATE TABLE [dbo].[Cliente] (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    Nome VARCHAR(100) NOT NULL
+    Nome VARCHAR(100) NOT NULL,
+    Documento VARCHAR(14) NOT NULL,
+    Telefone VARCHAR (11) NOT NULL,
+    TipoCliente BIT NOT NULL,
+    CriadoPor VARCHAR (128) NOT NULL,
+    CriadoEm DATETIME NOT NULL,
+    AlteradoPor VARCHAR (128),
+    AlteradoEm DATETIME 
 );
 GO
 

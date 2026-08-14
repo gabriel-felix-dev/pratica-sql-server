@@ -13,12 +13,12 @@ INSERT INTO [dbo].[TipoMovimentacao] (Id, Nome)
 GO
 
 -- 2. Inserir Clientes
-INSERT INTO [dbo].[Cliente] (Nome)
-    VALUES  ('Mobiliária Central Ltda'),
-            ('Design & Sofisticação Móveis'),
-            ('Ana Julia Souza'),
-            ('Carlos Alberto Silva'),
-            ('Construtora Novo Lar');
+INSERT INTO [dbo].[Cliente] (Nome, Documento, Telefone, TipoCliente, CriadoPor, CriadoEm)
+    VALUES  ('Mobiliária Central Ltda', '12345678000195', '11987654321', 0, SUSER_SNAME(), GETDATE()),
+            ('Design & Sofisticação Móveis', '23456789000106', '21987654321', 0, SUSER_SNAME(), GETDATE()),
+            ('Ana Julia Souza', '34567890000117', '31987654321', 0, SUSER_SNAME(), GETDATE()),
+            ('Carlos Alberto Silva', '45678901000128', '41987654321', 0, SUSER_SNAME(), GETDATE()),
+            ('Construtora Novo Lar', '56789012000139', '85987654321', 0, SUSER_SNAME(), GETDATE())
 GO
 
 -- 3. Inserir Catálogo de Móveis (Produtos)

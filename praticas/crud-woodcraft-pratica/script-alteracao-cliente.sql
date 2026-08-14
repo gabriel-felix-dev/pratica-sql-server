@@ -1,4 +1,5 @@
 USE WoodCraftPratica;
+GO
 
 -- 1. Analisar da tabela Cliente e alteração da tabela
 
