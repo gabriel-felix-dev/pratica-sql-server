@@ -1,12 +1,12 @@
 USE RicBankTeste;
 GO
 
-CREATE OR ALTER FUNCTION [dbo].[FNC_ConsultarSaldo_Gabriel] (@IdConta INT, @DataConsulta DATE)
+CREATE OR ALTER FUNCTION [dbo].[FNC_ConsultarSaldo_GabrielFelix] (@IdConta INT, @DataConsulta DATE)
 	RETURNS DECIMAL (10,2)
 	AS
 	/*
 		Documentacao
-		Arquivo Fonte............: FNC_ConsultarSaldo_Gabriel.sql
+		Arquivo Fonte............: FNC_ConsultarSaldo_GabrielFelix.sql
 		Obejtivo.................: Retornar o Saldo atual da conta caculando o SaldoInicial, MovimentacaoCredito e MovimentacaoDebito
 		Autor....................: Gabriel Felix
 		Data.....................: 21/08/2026
