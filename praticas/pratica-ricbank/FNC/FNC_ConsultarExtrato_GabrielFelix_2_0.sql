@@ -22,7 +22,7 @@ CREATE OR ALTER FUNCTION [dbo].[FNC_ConsultarExtrato_GabrielFelix_2_0] (@IdConta
 	RETURN (
 			 WITH ConsultarExtrato AS ( -- Consulta do Saldo Inicial
 									     SELECT  TOP 1 *
-											 FROM [dbo].[VW_RetornaSaldoIncialExtrato_GabrielFelix] as vw WITH(NOLOCK)
+											 FROM [dbo].[VW_RetornaSaldoExtrato_GabrielFelix] as vw WITH(NOLOCK)
 											 WHERE IdConta = @IdConta
 											   AND DataSaldo 
 											     -- Retorna o primeiro dia/mes/ano com base no parametro @MesExtrato e @AnoExtrato

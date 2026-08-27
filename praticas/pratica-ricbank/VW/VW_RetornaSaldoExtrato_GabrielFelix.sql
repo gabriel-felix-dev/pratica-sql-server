@@ -1,10 +1,10 @@
 USE RicBankTeste
 GO
 
-CREATE OR ALTER VIEW [dbo].[VW_RetornaSaldoIncialExtrato_GabrielFelix]
+CREATE OR ALTER VIEW [dbo].[VW_RetornaSaldoExtrato_GabrielFelix]
 /*
 	Documentacao
-	Arquivo Fonte............: VW_RetornaSaldoIncialExtrato_GabrielFelix.sql
+	Arquivo Fonte............: VW_RetornaSaldoExtrato_GabrielFelix.sql
 	Objetivo.................: Retornar uma tabela com todos os saldos somados
 	Autor....................: Gabriel Felix
 	Data.....................: 26/08/2025
@@ -14,7 +14,7 @@ CREATE OR ALTER VIEW [dbo].[VW_RetornaSaldoIncialExtrato_GabrielFelix]
 							   DECLARE @DataInicio DATETIME = GETDATE();
 
 							   SELECT  TOP 10 * 
-								   FROM [dbo].[VW_RetornaSaldoIncialExtrato_GabrielFelix];
+								   FROM [dbo].[VW_RetornaSaldoExtrato_GabrielFelix];
 
 							   SELECT  DATEDIFF(MILLISECOND, @DataInicio, GETDATE()) As TempoExecucao
 */		
