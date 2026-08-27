@@ -13,41 +13,35 @@ CREATE OR ALTER FUNCTION [dbo].[FNC_ConsultarExtrato_GabrielFelix_2_0] (@IdConta
 		Ex.......................: DBCC FREEPROCCACHE
 								   DBCC DROPCLEANBUFFERS
 
+								   DECLARE @DataInicio DATETIME = GETDATE();
+
 		                           SELECT * FROM [dbo].[FNC_ConsultarExtrato_GabrielFelix_2_0] (14, 08, 2026);
+
+								   SELECT  DATEDIFF(MILLISECOND, @DataInicio, GETDATE()) As TempoExecucao;
 	*/
 	RETURN (
 			 WITH ConsultarExtrato AS ( -- Consulta do Saldo Inicial
-									    	SELECT  TOP 1   IdConta,
-															DataSaldo,
-															Movimentacao,
-															TipoMovimentacao,
-															Valor
-												FROM [dbo].[VW_RetornaSaldoIncialExtrato_GabrielFelix] as vw WITH(NOLOCK)
-												WHERE IdConta = @IdConta
-													AND DataSaldo 
-														-- Retorna o primeiro dia/mes/ano com base no parametro @MesExtrato e @AnoExtrato
-														BETWEEN DATEADD( MONTH, -1,DATEFROMPARTS(@AnoExtrato, @MesExtrato, 1)) 
-														-- Retorna o ultimo dia/mes/ano com base no parametro @MesExtrato e @AnoExtrato
-														AND EOMONTH(DATEADD( MONTH, -1,DATEFROMPARTS(@AnoExtrato, @MesExtrato, 1)))
-												ORDER BY DataSaldo DESC
+									     SELECT  TOP 1 *
+											 FROM [dbo].[VW_RetornaSaldoIncialExtrato_GabrielFelix] as vw WITH(NOLOCK)
+											 WHERE IdConta = @IdConta
+											   AND DataSaldo 
+											     -- Retorna o primeiro dia/mes/ano com base no parametro @MesExtrato e @AnoExtrato
+											     BETWEEN DATEADD( MONTH, -1,DATEFROMPARTS(@AnoExtrato, @MesExtrato, 1)) 
+											     -- Retorna o ultimo dia/mes/ano com base no parametro @MesExtrato e @AnoExtrato
+											     AND EOMONTH(DATEADD( MONTH, -1,DATEFROMPARTS(@AnoExtrato, @MesExtrato, 1)))
+											 ORDER BY DataSaldo DESC
 
-										UNION ALL
+										 UNION ALL
 
 										-- Consulta do extrato geral de movimentacoes
-										SELECT	sa.IdConta As IdConta,
-												CAST(mo.DataHora AS DATE) As DataSaldo,
-												tm.Nome as Movimentacao,
-												mo.DebCre As TipoMovimentacao,
-												CASE WHEN mo.DebCre = 'D' THEN mo.Valor * -1
-													 ELSE mo.Valor
-												END As Valor
-											FROM [dbo].[Saldo] AS sa WITH(NOLOCK)
-												INNER JOIN [dbo].[Movimentacao] AS mo WITH(NOLOCK)
-													ON mo.IdSaldo = sa.Id
-												INNER JOIN [dbo].[TipoMovimentacao] AS tm WITH(NOLOCK)
-													ON tm.Id = mo.IdTipoMovimentacao
-											WHERE sa.IdConta = @IdConta
-												AND mo.DataHora BETWEEN DATEFROMPARTS(@AnoExtrato, @MesExtrato, 1) AND EOMONTH(DATEFROMPARTS(@AnoExtrato, @MesExtrato, 31))
+									     SELECT  *
+										     FROM [dbo].[VW_RetornaExtratoMovimentacao_GabrielFelix] WITH(NOLOCK)
+											 WHERE IdConta = @IdConta
+												AND DataSaldo 
+												  -- Pega o primeiro dia do mes 01/xx/xxxx com base nos parametros inseridos
+												  BETWEEN DATEFROMPARTS(@AnoExtrato, @MesExtrato, 1) 
+												  -- Pega o ultimo dia do mes 28/29/30/31/xx/xxxx com base nos parametros inseridos
+												  AND EOMONTH(DATEFROMPARTS(@AnoExtrato, @MesExtrato, 31))
 
 									 ),
 			CalculaSaldoFinal AS     ( -- Calcula o Saldo Final
@@ -60,7 +54,7 @@ CREATE OR ALTER FUNCTION [dbo].[FNC_ConsultarExtrato_GabrielFelix_2_0] (@IdConta
 																	PARTITION BY IdConta
 																	ORDER BY DataSaldo ASC
 																	ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-											) As Saldo
+											                   ) As Saldo
 										    FROM ConsultarExtrato
 					                 )
 	-- Consulta na CTe ConsultarExtrato para retorno o Saldo Inicial unido com o extrato geral das movimentacoes
