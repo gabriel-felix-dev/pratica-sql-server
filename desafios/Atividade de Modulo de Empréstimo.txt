@@ -1,0 +1,31 @@
+Modulo de empréstimo:
+
+ - Solicitação de empréstimo - 
+ - Avaliação de aprovação de empréstimo
+   - Se aprovado - gerar parcelas - job que debita do saldo de limite de empréstimo da conta
+                                  - job que credita o saldo do empréstimo solicitado na conta
+
+ - Juros simples de empréstimo: 5%. Realizar calculo de juros simples em cima do valor solicitado do empréstimo.
+
+Extrato do empréstimo: 
+
+ - Valor do empréstimo
+ - Data do empréstimo
+ - Data da aprovação
+ - Data do valor creditado em conta
+ - Data de vencimento
+ - Quantidade de parcelas
+ - valor do juros
+ - valor da parcela
+
+Extrato de parcelas: 
+
+ - Valor da parcela 
+ - Data de pagamento
+ - data do vencimento
+ - Status da parcela
+ - Valor pago
+ - valor de juros (juros mora)
+
+Juros de mora 10% ao mês - atraso por parcela.
+

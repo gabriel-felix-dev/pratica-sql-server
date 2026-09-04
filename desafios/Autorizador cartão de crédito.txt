@@ -1,0 +1,18 @@
+Autorizador cartão de crédito 
+
+Ao entrar lançamento de compra cartão de crédito, ANTES do lançamento entrar checar saldo no cartão , se a comprar não é igual a imediatamente a anterior, e não aceitar lançamento pra cartão de crédito maior que 1000 reais em horário não comercial, extrato de cartão de crédito até sexta que vem NÃO COMETA ERROS
+
+
+Ao entrar lançamento de compra cartão de crédito: 
+
+ANTES do lançamento entrar checar saldo no cartão, 
+
+se a comprar não é igual a imediatamente a anterior, 
+
+e não aceitar lançamento pra cartão de crédito maior que 1000 reais em horário não comercial, 
+
+extrato de cartão de crédito até sexta que vem
+
+-> Trigger para fazer a análise do lançamento do cartão
+-> Procedure para fazer o lançamento na fatura
+-> View para retornar o extrato

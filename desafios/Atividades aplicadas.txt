@@ -1,0 +1,9 @@
+Atividades: 
+
+- CRUD de Cliente
+- CRUD de Conta
+- Atualização de Saldo
+- Job de Atualização diária de Saldo
+- Gerar Extrato
+- Autorizar compra no crédito
+- Modulo de emprestimo
