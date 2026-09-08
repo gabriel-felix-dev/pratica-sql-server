@@ -1,6 +1,8 @@
 USE RicBankTeste;
 GO
 
+DROP TRIGGER [dbo].[TRG_AutorizarCartaoCredito_Gabriel_Felix];
+
 CREATE OR ALTER TRIGGER [dbo].[TRG_AutorizarCartaoCredito_Gabriel_Felix]
 	ON [dbo].[Compra] 
 	FOR INSERT
@@ -20,7 +22,12 @@ CREATE OR ALTER TRIGGER [dbo].[TRG_AutorizarCartaoCredito_Gabriel_Felix]
 		
 		Retornos.................: 0 - Sucesso
 		                           1 - ERRO: O cartão utilizado é de débito
-								   2 - 
+								   2 - ERRO: O cartão utilizado está fora da validade
+								   3 - ERRO: O cartão não está ativo
+								   4 - ERRO: O cartão não possui o limite para a compra
+								   5 - ERRO: A Compra é igual à anterior
+								   6 - ERRO: Não é possível usar o cartão fora do horário comercial
+								   7 - ERRO: Não é possível usar o cartão aos fins de semana
 	*/
 	BEGIN
 		-- Declarar variáveis
@@ -86,14 +93,14 @@ CREATE OR ALTER TRIGGER [dbo].[TRG_AutorizarCartaoCredito_Gabriel_Felix]
 
 		-- Validar se a compra não é igual a compra anterior
 		IF (
-		     SELECT  Estabelecimento
+		     SELECT  TOP 1 Estabelecimento
 				 FROM [dbo].[Compra]
 				 WHERE IdCartao = @IdCartao
 				 ORDER BY Id DESC
 
 		   ) = @Estabelecimento
 		   AND (
-		          SELECT  Valor
+		          SELECT  TOP 1 Valor
 				      FROM [dbo].[Compra]
 					  WHERE IdCartao = @IdCartao
 					  ORDER BY Id DESC
@@ -110,13 +117,15 @@ CREATE OR ALTER TRIGGER [dbo].[TRG_AutorizarCartaoCredito_Gabriel_Felix]
 				IF DATEPART(HOUR, GETDATE()) BETWEEN 0 AND 7 
 					OR DATEPART (HOUR, GETDATE()) BETWEEN 17 AND 23
 					BEGIN
-						RAISERROR('ERRO: A Compra é igual à anterior', 16, 6)
+						RAISERROR('ERRO: Não é possível usar o cartão fora do horário comercial', 16, 6)
 						RETURN
 					END
 
+				IF DATENAME(WEEKDAY, GETDATE()) IN ('Sábado', 'Domingo')
+					BEGIN 
+						RAISERROR('ERRO: Não é possível usar o cartão aos fins de semana', 16, 7)
+						RETURN
+					END
 			END
-
-		INSERT INTO Cliente (NomeCompleto) 
-			VALUES ('Nome')
 	END
 GO
