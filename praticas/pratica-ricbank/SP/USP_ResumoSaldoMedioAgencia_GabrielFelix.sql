@@ -21,6 +21,8 @@ CREATE PROCEDURE [dbo].[USP_ResumoSaldoMedioAgencia_GabrielFelix]
 		Objetivo................: Retonar a distribuição das contas de uma agência por faixa de saldo médio mensal
 		Autor...................: Gabriel Felix
 		Data....................: 08/09/2026
+		Autor Alteração.........: Gabriel Felix
+		Data Alteração..........: 09/09/2026 - Adicionando a CTe "BuscaIdConta" para reliazar as consultas de buscas para filtrar as contagens.
 		Ex......................: DBCC FREEPROCCACHE
 		                          DBCC DROPCLEANBUFFERS
 
@@ -55,37 +57,40 @@ CREATE PROCEDURE [dbo].[USP_ResumoSaldoMedioAgencia_GabrielFelix]
 
 		-- Validar Mes
 		IF @Mes NOT BETWEEN 1 AND 12
-			RETURN -2 
+			RETURN -3 
 		
-		-- Busca contas com média igual a 0 e menor/igual a 5.000
+		-- CTe para armazenar os Id's das contas com o @IdAgencia
+		;WITH BuscaIdConta AS (
+		                         SELECT  Id
+						             FROM [dbo].[Conta] WITH(NOLOCK)
+						             WHERE IdAgencia = 1
+					          )
+		-- Consulta contas com média igual a 0 e menor/igual a 5.000
 		SELECT  'De zero a 5.000' As Faixa,
 				COUNT ( 
 				        CASE WHEN [dbo].[FNC_SaldoMedioMensal_GabrielFelix](Id, @Ano, @Mes) >=0 AND [dbo].[FNC_SaldoMedioMensal_GabrielFelix](Id, @Ano, @Mes) <= 5000.00 THEN 1
 			            END
 					  ) As QuantidadeContas
-			FROM [dbo].[Conta] WITH(NOLOCK)
-			WHERE IdAgencia = @IdAgencia
+			FROM BuscaIdConta
 		
 		UNION ALL
 		
-		-- Busca contas com média maior que 5.000 e menor/igual a 10.000
+		-- Consulta contas com média maior que 5.000 e menor/igual a 10.000
 		SELECT  'De 5.000,01 a 10.000' As Faixa,
 				COUNT ( 
 				        CASE WHEN [dbo].[FNC_SaldoMedioMensal_GabrielFelix](Id, @Ano, @Mes) > 5000.00 AND [dbo].[FNC_SaldoMedioMensal_GabrielFelix](Id, @Ano, @Mes) <= 10000.00 THEN 1
 			            END
 					  ) As QuantidadeContas
-			FROM [dbo].[Conta] WITH(NOLOCK)
-			WHERE IdAgencia = @IdAgencia
+			FROM BuscaIdConta
 
 		UNION ALL
 
-		-- Busca contas com média maior 10.000
+		-- Consulta contas com média maior 10.000
 		SELECT  'Acima de 10.000' As Faixa,
 				COUNT ( 
 				        CASE WHEN [dbo].[FNC_SaldoMedioMensal_GabrielFelix](Id, @Ano, @Mes) > 10000.00 THEN 1
 			            END
 					  ) As QuantidadeContas
-			FROM [dbo].[Conta] WITH(NOLOCK)
-			WHERE IdAgencia = @IdAgencia
+			FROM BuscaIdConta
 	END
 GO

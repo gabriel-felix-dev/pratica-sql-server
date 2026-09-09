@@ -18,8 +18,12 @@ CREATE FUNCTION [dbo].[FNC_SaldoMedioMensal_GabrielFelix] (@IdConta INT, @Ano SM
 			Objetivo................: Calcular o saldo médio mensal de uma conta
 			Autor...................: Gabriel Felix
 			Data....................: 08/09/2026
-			Ex......................: SELECT [dbo].[FNC_SaldoMedioMensal_GabrielFelix] (14, 2026, 8) As SaldoMedioMensal
-			Retorno.................: SaldoMedioMensal - Sucesso
+			Autor Alteração.........: Gabriel Felix
+			Data Alteração..........: 09/09/2026 - Adicionando na Documentacao detalhamento de casos de Sucesso, Caso inválido, Parâmetro inválido e Mês incompleto
+			Ex......................: Sucesso................: SELECT [dbo].[FNC_SaldoMedioMensal_GabrielFelix] (14, 2026, 8) As SaldoMedioMensal;
+									  Caso inválido..........: SELECT [dbo].[FNC_SaldoMedioMensal_GabrielFelix] (999, 2026, 8) As SaldoMedioMensal;
+			                          Parâmetro inválido.....: SELECT [dbo].[FNC_SaldoMedioMensal_GabrielFelix] (14, 1899, 8) As SaldoMedioMensal;
+									  Mês incompleto.........: SELECT [dbo].[FNC_SaldoMedioMensal_GabrielFelix] (14, 2026, 9) As SaldoMedioMensal;
 		*/
 	BEGIN	
 	    -- Validar se conta existe
