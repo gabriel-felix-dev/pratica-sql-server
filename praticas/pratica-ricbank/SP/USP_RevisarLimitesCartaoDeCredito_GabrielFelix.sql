@@ -4,19 +4,19 @@ GO
 IF EXISTS (
 			 SELECT  1
 				 FROM [dbo].[sysobjects]
-				 WHERE Id = OBJECT_ID(N'[dbo].[USP_RevisarLimites_GabrielFelix]')
+				 WHERE Id = OBJECT_ID(N'[dbo].[USP_RevisarLimitesCartaoDeCredito_GabrielFelix]')
 					AND TYPE = 'P'
           )
-	DROP PROCEDURE [dbo].[USP_RevisarLimites_GabrielFelix]
+	DROP PROCEDURE [dbo].[USP_RevisarLimitesCartaoDeCredito_GabrielFelix]
 GO
 
-CREATE PROCEDURE [dbo].[USP_RevisarLimites_GabrielFelix]
+CREATE PROCEDURE [dbo].[USP_RevisarLimitesCartaoDeCredito_GabrielFelix]
 	@DataReferencia DATE = NULL,
 	@IdTipoLimite TINYINT
 	AS
 	/*
 		Documentacao
-		Arquivo Fonte............: USP_RevisarLimites_GabrielFelix.sql
+		Arquivo Fonte............: USP_RevisarLimitesCartaoDeCredito_GabrielFelix.sql
 		Objetivo.................: Revisar o limite das contas
 		Auto.....................: Gabriel Felix
 		Data.....................: 09/09/2026
@@ -26,8 +26,8 @@ CREATE PROCEDURE [dbo].[USP_RevisarLimites_GabrielFelix]
 								   DECLARE @Retorno INT,
 										   @DataInicio DATETIME = GETDATE();
 							       
-								   EXEC @Retorno = [dbo].[USP_RevisarLimites_GabrielFelix] @DataReferencia = '01/09/2026',
-								                                                           @IdTipoLimite = 1;
+								   EXEC @Retorno = [dbo].[[dbo].[USP_RevisarLimitesCartaoDeCredito_GabrielFelix] @DataReferencia = '01/09/2026',
+																												 @IdTipoLimite = 1;
 
 								   SELECT  @Retorno As Retorno,
 										   DATEDIFF(MILLISECOND, @DataInicio,  GETDATE()) As TempoExecucao
@@ -55,13 +55,11 @@ CREATE PROCEDURE [dbo].[USP_RevisarLimites_GabrielFelix]
 
 		-- Definir variáveis para armazenar os três meses anteriores
 
-		DECLARE @PrimeiroMes DATE = DATEADD(MONTH, -1, DATEFROMPARTS(@Ano, @Mes, 1))--,		
-		DECLARE @SegundoMes DATE =  DATEADD(MONTH, -1, @PrimeiroMes);
-		DECLARE @TerceiroMes DATE =  DATEADD(MONTH, -1, @SegundoMes);
-		--		@SegundoMes DATE = DATEADD(MONTH, -2, DATEFROMPARTS(@Ano, @Mes, 1)),
-		--		@TerceiroMes DATE = DATEADD(MONTH, -3, DATEFROMPARTS(@Ano, @Mes, 1));
+		DECLARE @PrimeiroMes DATE = DATEADD(MONTH, -1, DATEFROMPARTS(@Ano, @Mes, 1)),		
+			    @SegundoMes DATE = DATEADD(MONTH, -2, DATEFROMPARTS(@Ano, @Mes, 1)),
+				@TerceiroMes DATE = DATEADD(MONTH, -3, DATEFROMPARTS(@Ano, @Mes, 1));
 
-
+		SELECT * FROM TipoLimite;
 
 
 		RETURN 0
